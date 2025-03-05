@@ -8,6 +8,7 @@ bool cpupin(int cpuid) {
     std::cout << "sched_setaffinity error: " << strerror(errno) << std::endl;
     return false;
   }
+  std::cout << "sched_setaffinity to cpu id: " << cpuid << std::endl;
 
   return true;
 }

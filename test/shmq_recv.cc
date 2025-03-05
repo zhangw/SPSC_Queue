@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "chrono.h"
 #include "rdtsc.h"
 #include "cpupin.h"
 #include "shmq_msg.h"
@@ -16,7 +17,9 @@ int main() {
             ;
         long latency = rdtsc();
         latency -= msg->ts;
-        std::cout << "recv: " << msg->buf << " ,latency: " << latency << std::endl;
+        auto cxx_tp = CXXChrono::now();
+        auto latency_cxx_tp = CXXChrono::diff_tps(msg->cxx_tp, cxx_tp);
+        std::cout << "recv: " << msg->buf << " ,latency (rdtsc): " << latency << " , latency (cxx clock [ns]): " << latency_cxx_tp << std::endl;
         q->pop();
     }
 
